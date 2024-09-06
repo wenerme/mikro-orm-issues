@@ -1,33 +1,8 @@
 import 'reflect-metadata';
-import { MikroORM, ReflectMetadataProvider } from '@mikro-orm/core';
-import { defineConfig } from '@mikro-orm/sqlite';
-import { AuthorEntity } from './entities/AuthorEntity';
-import { BookEntity } from './entities/BookEntity';
-
-async function connectAndGetOrm() {
-  const orm = await MikroORM.init(
-    defineConfig({
-      entities: [AuthorEntity, BookEntity],
-      dbName: ':memory:',
-      // dbName: 'test.sqlite',
-      // clientUrl: "sqlite://:memory:",
-      forceUndefined: true,
-      // debug: Boolean(process.env.DB_DEBUG),
-      debug: true,
-      discovery: {
-        disableDynamicFileAccess: true,
-        requireEntitiesArray: true,
-      },
-      metadataProvider: ReflectMetadataProvider,
-      // baseDir: __dirname // defaults to `process.cwd()`
-    }),
-  );
-
-  return orm;
-}
+import { getMemoryOrm } from '@/getMemoryOrm';
 
 export async function runMain() {
-  const orm = await connectAndGetOrm();
+  const orm = await getMemoryOrm();
   const em = orm.em;
   const prepare = [
     `

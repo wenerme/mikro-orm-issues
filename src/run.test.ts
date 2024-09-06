@@ -2,7 +2,7 @@ import { Entity, Property, ReflectMetadataProvider, Unique } from '@mikro-orm/co
 import { defineConfig, MikroORM } from '@mikro-orm/postgresql';
 import { PostgresMock } from 'pgmock';
 import { expect, test } from 'vitest';
-import { StandardBaseEntity } from '@/entities/StandardBaseEntity';
+import { StandardBaseEntity } from '@/entity/StandardBaseEntity';
 import { runMain } from '@/main';
 
 test('run', async () => {
